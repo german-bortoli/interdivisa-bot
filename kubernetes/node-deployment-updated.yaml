@@ -25,11 +25,16 @@ spec:
         - name: POSTGRES_USER
           valueFrom:
             secretKeyRef:
-              name: postgres-credentials
-              key: user
+              name: app-secrets
+              key: db_user
         - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: postgres-credentials
-              key: password
+              name: app-secrets
+              key: db_password
+        - name: BOT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: app-secrets
+              key: bot_token
       restartPolicy: Always

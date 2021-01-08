@@ -23,7 +23,7 @@ Install the [Google Cloud SDK](https://cloud.google.com/sdk), run `gcloud init` 
 Set the project:
 
 ```sh
-$ gcloud config set project <PROJECT_ID>
+$ gcloud config set project interdivisas-bot
 ```
 
 Install `kubectl`:
@@ -53,8 +53,8 @@ Build and push the image to the [Container Registry](https://cloud.google.com/co
 
 ```sh
 $ gcloud auth configure-docker
-$ docker build -t gcr.io/<PROJECT_ID>/node-kubernetes:v0.0.1 .
-$ docker push gcr.io/<PROJECT_ID>/node-kubernetes:v0.0.1
+$ docker build -t gcr.io/interdivisas-bot/node-kubernetes:v0.0.1 .
+$ docker push gcr.io/interdivisas-bot/node-kubernetes:v0.0.1
 ```
 
 #### Secrets
@@ -70,7 +70,7 @@ $ kubectl apply -f ./kubernetes/secret.yaml
 Create a [Persistent Disk](https://cloud.google.com/persistent-disk/):
 
 ```sh
-$ gcloud compute disks create pg-data-disk --size 50GB --zone us-central1-a
+$ gcloud compute disks create pg-data-disk --size 25GB --zone us-central1-a
 ```
 
 Create the volume:
@@ -155,5 +155,5 @@ $ kubectl delete -f ./kubernetes/postgres-service.yaml
 
 $ gcloud container clusters delete node-kubernetes --zone us-central1-a
 $ gcloud compute disks delete pg-data-disk --zone us-central1-a
-$ gcloud container images delete gcr.io/<PROJECT_ID>/node-kubernetes:v0.0.1
+$ gcloud container images delete gcr.io/interdivisas-bot/node-kubernetes:v0.0.1
 ```
