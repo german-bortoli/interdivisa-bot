@@ -1,0 +1,39 @@
+version: '3.7'
+
+services:
+
+  app:
+    build: .
+    environment:
+      - NODE_ENV=development
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - BOT_TOKEN=${BOT_TOKEN}
+    ports:
+      - 3000:3000
+    volumes:
+      - "./:/src/"
+      - /src/node_modules
+    depends_on:
+      - postgres
+    networks:
+      - intdivbot-network
+
+  postgres:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=todos
+    expose:
+      - 5432
+    networks:
+      - intdivbot-network
+    volumes:
+      - intdivbot-psg-data:/var/lib/postgresql/data
+
+networks:
+  intdivbot-network:
+
+volumes:
+  intdivbot-psg-data:
