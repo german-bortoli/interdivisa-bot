@@ -19,9 +19,13 @@ spec:
         image: gcr.io/interdivisas-bot/node-kubernetes:v0.0.1 # update
         env:
         - name: NODE_ENV
-          value: "development"
+          value: "production"
         - name: PORT
           value: "3000"
+        - name: POSTGRES_DB
+          value: "interdivisa_bot"
+        - name: POSTGRES_HOST
+          value: "postgres"
         - name: POSTGRES_USER
           valueFrom:
             secretKeyRef:

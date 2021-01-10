@@ -5,7 +5,7 @@ FROM node:14
 WORKDIR /src
 
 # Install runtime dependencies
-RUN npm install typescript -g
+RUN npm install -g typescript pm2
 
 # Copy app source to work directory
 COPY . /src
