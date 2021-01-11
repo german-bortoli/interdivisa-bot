@@ -53,6 +53,11 @@ export const getMessageFormatFromText = (text: string): MessageFormat | never =>
     mappedItems[textKey] = line.slice(1).join(':').trim();
   });
 
+  if (typeof mappedItems['pago'] !== 'undefined') {
+    mappedItems['formadepago'] = mappedItems['pago'];
+    delete mappedItems['pago'];
+  }
+
   // Validates against format
   const { error } = schema.validate(mappedItems);
   if (error) {
