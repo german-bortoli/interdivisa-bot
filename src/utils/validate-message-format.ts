@@ -64,7 +64,6 @@ export const getMessageFormatFromText = (text: string): MessageFormat | never =>
     operationType = operation.indexOf('vendo') >= 0 ? 'venta' : operation.indexOf('compro') >= 0 ? 'compra' : null;
   }
 
-
   const toReturn = {
     operation,
     operationType,
