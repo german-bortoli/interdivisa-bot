@@ -13,7 +13,7 @@ const main = async () => {
 
   bot.use(appendAdmins);
 
-  bot.on('text', onlyGroups, (ctx) => {
+  bot.on('text', onlyGroups, nonAdmins, (ctx) => {
     try {
       const registry = getMessageFormatFromText(ctx.message.text);
       // console.log('Valid format', registry);
