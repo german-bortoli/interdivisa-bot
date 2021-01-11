@@ -36,6 +36,21 @@ services:
     volumes:
       - intdivbot-psg-data:/var/lib/postgresql/data
 
+  # Adminer
+  adminer:
+    image: adminer
+    restart: always
+    environment:
+      - 'ADMINER_DEFAULT_DB_DRIVER=pgsql'
+      - 'ADMINER_DEFAULT_DB_HOST=postgres'
+      - 'ADMINER_DEFAULT_DB_NAME=interdivisa_bot'
+    depends_on:
+      - postgres
+    ports:
+      - 8981:8080
+    networks:
+      - intdivbot-network
+
 networks:
   intdivbot-network:
 

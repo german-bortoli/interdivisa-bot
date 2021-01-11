@@ -1,6 +1,7 @@
 export default {
+  env: process.env.NODE_ENV ?? 'development',
   db: {
-    user: process.env.POSTGRES_USER ?? 'postgres',
+    username: process.env.POSTGRES_USER ?? 'postgres',
     host: process.env.POSTGRES_HOST ?? 'localhsot',
     database: process.env.POSTGRES_DB ?? 'interdivisa_bot',
     password: process.env.POSTGRES_PASSWORD ?? 'password123',

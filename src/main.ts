@@ -2,7 +2,7 @@ import telegraf from './loaders';
 import { onlyGroups, appendAdmins, nonAdmins } from './middlewares';
 
 const main = async () => {
-  const bot = telegraf();
+  const bot = await telegraf();
   bot.start((ctx) => ctx.reply('Bienvenido'));
   bot.help((ctx) => ctx.reply('InterDivisa Bot'));
 
