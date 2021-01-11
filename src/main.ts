@@ -1,6 +1,7 @@
 import telegraf from './loaders';
 import { onlyGroups, appendAdmins, nonAdmins } from './middlewares';
 import { getMessageFormatFromText } from './utils';
+import { LogDeletion, LogOperation } from './services';
 
 const main = async () => {
   const bot = await telegraf();
@@ -16,10 +17,10 @@ const main = async () => {
   bot.on('text', onlyGroups, nonAdmins, (ctx) => {
     try {
       const registry = getMessageFormatFromText(ctx.message.text);
-      // console.log('Valid format', registry);
+      LogOperation(ctx, registry);
     } catch (e) {
       ctx.telegram.deleteMessage(ctx.chat.id, ctx.message.message_id);
-      // console.log('Deleting message', ctx.message.text);
+      LogDeletion(ctx);
     }
   });
 

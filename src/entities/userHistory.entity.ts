@@ -2,7 +2,7 @@ import { Column, PrimaryGeneratedColumn, CreateDateColumn, Entity, Index } from 
 
 @Entity({ name: 'user_histories' })
 @Index(['userId', 'groupName'], { unique: true })
-export class OperationEntity {
+export class UserHistoryEntity {
   @PrimaryGeneratedColumn('uuid')
   public uuid: string;
 

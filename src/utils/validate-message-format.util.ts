@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-type MessageFormat = {
+export type MessageFormat = {
   operation: string;
   operationType: string;
   quantity: string;

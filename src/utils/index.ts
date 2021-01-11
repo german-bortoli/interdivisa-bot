@@ -1,1 +1,1 @@
-export * from './validate-message-format';
+export * from './validate-message-format.util';
