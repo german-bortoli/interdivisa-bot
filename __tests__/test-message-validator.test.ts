@@ -48,7 +48,6 @@ it('Compra: Validate proper format', () => {
   expect(result).toEqual(expected);
 });
 
-
 it('Validate wrong format', () => {
   const text = `
     Cantidad: 11.600
@@ -90,7 +89,6 @@ it('Validate wrong format with extra unwanted texts', () => {
   }
 });
 
-
 it('Validate wrong format with empty values', () => {
   const text = `
     OperacíoN : 123
@@ -109,7 +107,6 @@ it('Validate wrong format with empty values', () => {
     expect(e).toBe('"formadepago" is not allowed to be empty');
   }
 });
-
 
 it('Check empty string', () => {
   const text = ``;
