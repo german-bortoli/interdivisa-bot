@@ -26,6 +26,18 @@ export class OperationEntity {
 
   @Column('varchar', {
     nullable: true,
+    length: 50,
+  })
+  public operationType: string;
+
+  @Column('varchar', {
+    nullable: true,
+    length: 100,
+  })
+  public paymentOption: string;
+
+  @Column('varchar', {
+    nullable: true,
     length: 100,
   })
   public quantity: string;
