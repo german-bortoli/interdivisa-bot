@@ -4,6 +4,6 @@ dotenv.config();
 
 import config from '../config';
 
-export default () => {
+export default (): InstanceType<typeof Telegraf> => {
   return new Telegraf(config.botToken);
 };

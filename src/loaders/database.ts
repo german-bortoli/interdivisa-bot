@@ -12,9 +12,7 @@ export default async (): Promise<Connection> => {
     database: config.db.database,
     synchronize: true,
     logging: config.env !== 'production',
-    entities: [
-      'src/entities/*.entity.ts'
-    ],
+    entities: ['src/entities/*.entity.ts'],
   };
 
   // create a connection using modified connection options

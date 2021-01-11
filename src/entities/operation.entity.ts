@@ -1,16 +1,8 @@
-import {
-  Column,
-  PrimaryGeneratedColumn,
-  CreateDateColumn,
-  UpdateDateColumn,
-  Entity,
-  Index,
-} from 'typeorm';
+import { Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Entity, Index } from 'typeorm';
 
 @Entity({ name: 'operations' })
 @Index(['userId', 'groupName'], { unique: true })
 export class OperationEntity {
-
   @PrimaryGeneratedColumn('uuid')
   public uuid: string;
 
