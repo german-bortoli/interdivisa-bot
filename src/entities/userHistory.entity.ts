@@ -1,7 +1,6 @@
 import { Column, PrimaryGeneratedColumn, CreateDateColumn, Entity, Index } from 'typeorm';
 
 @Entity({ name: 'user_histories' })
-@Index(['userId', 'groupName'], { unique: true })
 export class UserHistoryEntity {
   @PrimaryGeneratedColumn('uuid')
   public uuid: string;

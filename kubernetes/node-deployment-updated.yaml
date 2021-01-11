@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: node
-        image: gcr.io/interdivisas-bot/node-kubernetes:v0.0.1 # update
+        image: gcr.io/interdivisas-bot/node-kubernetes:v0.1.0 # update
         env:
         - name: NODE_ENV
           value: "production"
@@ -25,7 +25,7 @@ spec:
         - name: POSTGRES_DB
           value: "interdivisa_bot"
         - name: POSTGRES_HOST
-          value: "postgres"
+          value: "postgres.default"
         - name: POSTGRES_USER
           valueFrom:
             secretKeyRef:

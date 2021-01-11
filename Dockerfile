@@ -19,4 +19,4 @@ RUN yarn build
 #Expose port
 EXPOSE 3000
 
-CMD ["yarn", "start"]
+CMD ["yarn", "start:dev"]

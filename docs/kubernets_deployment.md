@@ -53,8 +53,8 @@ Build and push the image to the [Container Registry](https://cloud.google.com/co
 
 ```sh
 $ gcloud auth configure-docker
-$ docker build -t gcr.io/interdivisas-bot/node-kubernetes:v0.0.1 .
-$ docker push gcr.io/interdivisas-bot/node-kubernetes:v0.0.1
+$ docker build --no-cache -t gcr.io/interdivisas-bot/node-kubernetes:v0.1.0 .
+$ docker push gcr.io/interdivisas-bot/node-kubernetes:v0.1.0
 ```
 
 #### Secrets
@@ -70,7 +70,7 @@ $ kubectl apply -f ./kubernetes/secret.yaml
 Create a [Persistent Disk](https://cloud.google.com/persistent-disk/):
 
 ```sh
-$ gcloud compute disks create pg-data-disk --size 25GB --zone us-central1-a
+$ gcloud compute disks create pg-data-disk --size 50GB --zone us-central1-a
 ```
 
 Create the volume:
@@ -104,6 +104,8 @@ Create the database:
 ```sh
 $ kubectl get pods
 $ kubectl exec <POD_NAME> --stdin --tty -- createdb -U <DB_USER> <DB_NAME>
+
+Example: kubectl exec postgres-57fdf4d959-sv7vd --stdin --tty -- createdb -U intdiv_bot interdivisa_bot
 ```
 
 #### Node
@@ -155,5 +157,5 @@ $ kubectl delete -f ./kubernetes/postgres-service.yaml
 
 $ gcloud container clusters delete node-kubernetes --zone us-central1-a
 $ gcloud compute disks delete pg-data-disk --zone us-central1-a
-$ gcloud container images delete gcr.io/interdivisas-bot/node-kubernetes:v0.0.1
+$ gcloud container images delete gcr.io/interdivisas-bot/node-kubernetes:v0.1.0
 ```
