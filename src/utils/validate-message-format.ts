@@ -1,12 +1,23 @@
+import Joi from 'joi';
+
 type MessageFormat = {
-  operation: string; // operacion req
-  operationType: string; // auto generado, venta o compra req
-  quantity: string; // cantidad req
-  paymentOption: string; // forma de pago
-  price: string; // precio req
-  location: string; // zona
-  notes: string; // observacion
+  operation: string;
+  operationType: string;
+  quantity: string;
+  paymentOption: string;
+  price: string;
+  location: string;
+  notes: string;
 };
+
+const schema = Joi.object({
+  operacion: Joi.string().min(3).required(),
+  cantidad: Joi.string().min(2).required(),
+  precio: Joi.string().min(1).required(),
+  formadepago: Joi.string().optional(),
+  zona: Joi.string().optional(),
+  observacion: Joi.string().optional(),
+});
 
 /**
  * Validates and retrieves a message format from a text
@@ -42,6 +53,11 @@ export const getMessageFormatFromText = (text: string): MessageFormat | never =>
     mappedItems[textKey] = line.slice(1).join(':').trim();
   });
 
+  const { error } = schema.validate(mappedItems);
+  if (error) {
+    throw error.message;
+  }
+
   const operation = mappedItems?.operacion ?? '';
   const operationType = operation.indexOf('venta') >= 0 ? 'venta' : operation.indexOf('compra') >= 0 ? 'compra' : null;
 
@@ -56,6 +72,4 @@ export const getMessageFormatFromText = (text: string): MessageFormat | never =>
   };
 
   return toReturn;
-
-  // throw 'Error while validating';
 };

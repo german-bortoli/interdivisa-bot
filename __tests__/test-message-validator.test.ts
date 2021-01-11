@@ -24,3 +24,66 @@ it('Validate proper format', () => {
   expect.assertions(1);
   expect(result).toEqual(expected);
 });
+
+
+
+it('Validate wrong format', () => {
+  const text = `
+    Cantidad: 11.600
+    zaraza: algo loco
+    Precio: $163
+    Forma de pago: efectivo billetes grandes
+    Zona: microcentro: Santa Fe
+    Observación: Billetes rotos`;
+
+  expect.assertions(1);
+
+  try {
+    getMessageFormatFromText(text);
+    // Fail test if above expression doesn't throw anything.
+    expect(true).toBe(false);
+  } catch (e) {
+    expect(e).toBe('"operacion" is required');
+  }
+});
+
+it('Validate wrong format with extra unwanted texts', () => {
+  const text = `
+    Operacion: 123
+    Cantidad: 11.600
+    zaraza: algo loco
+    Precio: $163
+    Forma de pago: efectivo billetes grandes
+    Zona: microcentro: Santa Fe
+    Observación: Billetes rotos`;
+
+  expect.assertions(1);
+
+  try {
+    const result = getMessageFormatFromText(text);
+    // Fail test if above expression doesn't throw anything.
+    expect(true).toBe(false);
+  } catch (e) {
+    expect(e).toBe('"zaraza" is not allowed');
+  }
+});
+
+
+it('Validate wrong format with empty values', () => {
+  const text = `
+    OperacíoN : 123
+    Cantidad: 11.600
+    zaraza: algo loco
+    Precio: $163
+    Fórmá de pago:`;
+
+  expect.assertions(1);
+
+  try {
+    const result = getMessageFormatFromText(text);
+    // Fail test if above expression doesn't throw anything.
+    expect(true).toBe(false);
+  } catch (e) {
+    expect(e).toBe('"formadepago" is not allowed to be empty');
+  }
+});
