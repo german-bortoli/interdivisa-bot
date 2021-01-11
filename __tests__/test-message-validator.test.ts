@@ -1,6 +1,6 @@
 import { getMessageFormatFromText } from '../src/utils';
 
-it('Validate proper format', () => {
+it('Venta: Validate proper format', () => {
   const text = `
     Operación : venta USD cara grande
     Cantidad: 11.600
@@ -25,6 +25,28 @@ it('Validate proper format', () => {
   expect(result).toEqual(expected);
 });
 
+it('Compra: Validate proper format', () => {
+  const text = `
+    Operación : Compro USD cara chica
+    Cantidad : 500
+    Precio:a convenir
+    Zona : Santa Fe, centro`;
+
+  const result = getMessageFormatFromText(text);
+
+  const expected = {
+    operation: 'compro usd cara chica',
+    operationType: 'compra',
+    quantity: '500',
+    paymentOption: '',
+    price: 'a convenir',
+    location: 'santa fe, centro',
+    notes: '',
+  };
+
+  expect.assertions(1);
+  expect(result).toEqual(expected);
+});
 
 
 it('Validate wrong format', () => {
@@ -85,5 +107,20 @@ it('Validate wrong format with empty values', () => {
     expect(true).toBe(false);
   } catch (e) {
     expect(e).toBe('"formadepago" is not allowed to be empty');
+  }
+});
+
+
+it('Check empty string', () => {
+  const text = ``;
+
+  expect.assertions(1);
+
+  try {
+    const result = getMessageFormatFromText(text);
+    // Fail test if above expression doesn't throw anything.
+    expect(true).toBe(false);
+  } catch (e) {
+    expect(e).toBe('Text is empty');
   }
 });

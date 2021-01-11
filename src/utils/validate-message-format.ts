@@ -59,7 +59,11 @@ export const getMessageFormatFromText = (text: string): MessageFormat | never =>
   }
 
   const operation = mappedItems?.operacion ?? '';
-  const operationType = operation.indexOf('venta') >= 0 ? 'venta' : operation.indexOf('compra') >= 0 ? 'compra' : null;
+  let operationType = operation.indexOf('venta') >= 0 ? 'venta' : operation.indexOf('compra') >= 0 ? 'compra' : null;
+  if (!operationType) {
+    operationType = operation.indexOf('vendo') >= 0 ? 'venta' : operation.indexOf('compro') >= 0 ? 'compra' : null;
+  }
+
 
   const toReturn = {
     operation,
