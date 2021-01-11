@@ -16,8 +16,10 @@ const main = async () => {
   bot.on('text', onlyGroups, nonAdmins, (ctx) => {
     try {
       const registry = getMessageFormatFromText(ctx.message.text);
+      // console.log('Valid format', registry);
     } catch (e) {
       ctx.telegram.deleteMessage(ctx.chat.id, ctx.message.message_id);
+      // console.log('Deleting message', ctx.message.text);
     }
   });
 

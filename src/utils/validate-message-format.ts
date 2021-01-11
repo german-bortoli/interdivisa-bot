@@ -53,6 +53,7 @@ export const getMessageFormatFromText = (text: string): MessageFormat | never =>
     mappedItems[textKey] = line.slice(1).join(':').trim();
   });
 
+  // Validates against format
   const { error } = schema.validate(mappedItems);
   if (error) {
     throw error.message;
