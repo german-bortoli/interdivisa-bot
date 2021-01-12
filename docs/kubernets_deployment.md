@@ -38,7 +38,7 @@ Create a cluster on [Kubernetes Engine](https://console.cloud.google.com/kuberne
 
 ```sh
 $ gcloud container clusters create node-kubernetes \
-    --num-nodes=3 --zone us-central1-a --machine-type g1-small
+    --num-nodes=1 --zone us-central1-a --machine-type g1-small
 ```
 
 Connect the `kubectl` client to the cluster:
@@ -53,8 +53,8 @@ Build and push the image to the [Container Registry](https://cloud.google.com/co
 
 ```sh
 $ gcloud auth configure-docker
-$ docker build --no-cache -t gcr.io/interdivisas-bot/node-kubernetes:v0.1.0 .
-$ docker push gcr.io/interdivisas-bot/node-kubernetes:v0.1.0
+$ docker build --no-cache -t gcr.io/interdivisas-bot/node-kubernetes:v0.1.2 .
+$ docker push gcr.io/interdivisas-bot/node-kubernetes:v0.1.2
 ```
 
 #### Secrets
@@ -105,7 +105,7 @@ Create the database:
 $ kubectl get pods
 $ kubectl exec <POD_NAME> --stdin --tty -- createdb -U <DB_USER> <DB_NAME>
 
-Example: kubectl exec postgres-57fdf4d959-sv7vd --stdin --tty -- createdb -U intdiv_bot interdivisa_bot
+Example: kubectl exec postgres-57fdf4d959-f69nh --stdin --tty -- createdb -U intdiv_bot interdivisa_bot
 ```
 
 #### Node
@@ -157,5 +157,5 @@ $ kubectl delete -f ./kubernetes/postgres-service.yaml
 
 $ gcloud container clusters delete node-kubernetes --zone us-central1-a
 $ gcloud compute disks delete pg-data-disk --zone us-central1-a
-$ gcloud container images delete gcr.io/interdivisas-bot/node-kubernetes:v0.1.0
+$ gcloud container images delete gcr.io/interdivisas-bot/node-kubernetes:v0.1.2
 ```
