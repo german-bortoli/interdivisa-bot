@@ -6,7 +6,6 @@
   "repository": "git@github.com:german-bortoli/interdivisa-bot.git",
   "author": "German Bortoli <german@borto.li>",
   "license": "MIT",
-  "type": "module",
   "private": true,
   "devDependencies": {
     "@types/dotenv": "^8.2.0",
@@ -45,7 +44,7 @@
     "format": "prettier --write \"src/**/*.ts\"",
     "prestart:prod": "rimraf dist && npm run build",
     "start:dev": "nodemon",
-    "start": "node build/main.js",
+    "start": "ts-node  --transpile-only ./src/main.ts",
     "test": "jest",
     "lint": "npm run lint:js ",
     "lint:eslint": "eslint --ignore-path .gitignore --ext .ts",
