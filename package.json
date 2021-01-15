@@ -43,7 +43,7 @@
     "format": "prettier --write \"src/**/*.ts\"",
     "prestart:prod": "rimraf dist && npm run build",
     "start:dev": "nodemon",
-    "start": "node ./build/main.js",
+    "start": "node build/main.js",
     "test": "jest",
     "lint": "npm run lint:js ",
     "lint:eslint": "eslint --ignore-path .gitignore --ext .ts",
