@@ -11,6 +11,9 @@ export default async (): Promise<Connection> => {
     password: config.db.password,
     database: config.db.database,
     synchronize: true,
+    ssl: {
+      rejectUnauthorized: false,
+    },
     logging: config.env !== 'production',
     entities: ['src/entities/*.entity.ts'],
   };
