@@ -34,18 +34,19 @@
     "joi": "^17.3.0",
     "pg": "^8.5.1",
     "telegraf": "^3.38.0",
+    "ts-loader": "^8.0.14",
     "typeorm": "^0.2.29"
   },
   "engines": {
     "node": ">=12.0.0"
   },
   "scripts": {
-    "build": "rimraf build && tsc",
+    "build": "rimraf build && tsc -p .",
     "postinstall": "npm run build",
     "format": "prettier --write \"src/**/*.ts\"",
     "prestart:prod": "rimraf dist && npm run build",
     "start:dev": "nodemon",
-    "start": "node --experimental-modules build/main.js",
+    "start": "node build/main.js",
     "start:prod": "ts-node  --transpile-only ./src/main.ts",
     "test": "jest",
     "lint": "npm run lint:js ",
