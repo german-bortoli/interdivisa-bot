@@ -1,4 +1,4 @@
-import { Column, PrimaryGeneratedColumn, CreateDateColumn, Entity, Index } from 'typeorm';
+import { Column, PrimaryGeneratedColumn, CreateDateColumn, Entity } from 'typeorm';
 
 @Entity({ name: 'user_histories' })
 export class UserHistoryEntity {
