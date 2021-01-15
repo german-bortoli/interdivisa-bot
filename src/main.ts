@@ -2,6 +2,24 @@ import telegraf from './loaders';
 import { onlyGroups, appendAdmins, nonAdmins } from './middlewares';
 import { getMessageFormatFromText } from './utils';
 import { LogDeletion, LogOperation } from './services';
+import fastify from 'fastify';
+
+const server = fastify({
+  logger: true,
+});
+
+server.get('/', async (request, reply) => {
+  return { bot: 'alive' };
+});
+
+const initRestServer = async () => {
+  try {
+    await server.listen(process.env.PORT ?? '3000', '0.0.0.0');
+  } catch (err) {
+    server.log.error(err);
+    process.exit(1);
+  }
+};
 
 const main = async () => {
   const bot = await telegraf();
@@ -24,8 +42,9 @@ const main = async () => {
     }
   });
 
-  bot.launch().then(() => {
+  bot.launch().then(async () => {
     console.log('Bot has been started');
+    await initRestServer()
   });
 };
 
