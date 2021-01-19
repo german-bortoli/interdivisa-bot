@@ -19,8 +19,8 @@ const schema = Joi.object({
   cantidad: Joi.string().min(2).max(13).required(),
   precio: Joi.string().min(1).max(13).required(),
   formadepago: Joi.string().max(25).optional(),
-  zona: Joi.string().max(25).optional(),
-  observacion: Joi.string().optional(),
+  zona: Joi.string().max(30).optional(),
+  observacion: Joi.string().max(200).optional(),
 });
 
 /**
