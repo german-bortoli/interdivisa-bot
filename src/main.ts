@@ -1,9 +1,6 @@
 import telegraf from './loaders';
-import { onlyGroups, appendAdmins, nonAdmins } from './middlewares';
-import { getMessageFormatFromText } from './utils';
-import { LogDeletion, LogOperation } from './services';
+import { onlyGroups, appendAdmins, nonAdmins, messageFormatMiddleware } from './middlewares';
 import fastify from 'fastify';
-import { TelegrafContext } from 'telegraf/typings/context';
 
 const server = fastify({
   logger: true,
@@ -33,23 +30,12 @@ const main = async () => {
 
   bot.use(appendAdmins);
 
-  bot.on('text', onlyGroups, nonAdmins, (ctx: TelegrafContext) => {
-    try {
-      const registry = getMessageFormatFromText(ctx.message.text);
-      LogOperation(ctx, registry);
-    } catch (e) {
-      try {
-        ctx.telegram.deleteMessage(ctx.chat.id, ctx.message.message_id);
-        LogDeletion(ctx);
-      } catch (e) {
-        console.log('ERROR>>', e);
-      }
-    }
-  });
+  bot.on('text', onlyGroups, nonAdmins, messageFormatMiddleware);
+  bot.on('edited_message', onlyGroups, nonAdmins, messageFormatMiddleware);
 
   bot.launch().then(async () => {
     console.log('Bot has been started');
-    await initRestServer()
+    await initRestServer();
   });
 };
 
