@@ -15,7 +15,7 @@ export default async (): Promise<Connection> => {
     entities: [config.db.entities],
   };
 
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.IS_HEROKU) {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     connectionOptions['ssl'] = {

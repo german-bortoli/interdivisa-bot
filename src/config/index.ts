@@ -8,7 +8,7 @@ export default {
     port: process.env.POSTGRES_PORT ?? 5432,
     entities:
       process.env.ORM_ENTITIES ?? process.env.NODE_ENV === 'production'
-        ? 'entities/*.entity.js'
+        ? 'build/entities/*.entity.js'
         : 'src/entities/*.entity.ts',
   },
   botToken: process.env.BOT_TOKEN ?? '',
