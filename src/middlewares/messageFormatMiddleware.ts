@@ -13,11 +13,11 @@ export const messageFormatMiddleware = (
   }
 
   try {
-    const registry = getMessageFormatFromText(ctx.message.text);
+    const registry = getMessageFormatFromText(message.text);
     LogOperation(ctx, registry);
   } catch (e) {
     try {
-      ctx.telegram.deleteMessage(ctx.chat.id, ctx.message.message_id);
+      ctx.telegram.deleteMessage(ctx.chat.id, message.message_id);
       LogDeletion(ctx);
     } catch (er) {
       console.log('ERROR>>', er);
