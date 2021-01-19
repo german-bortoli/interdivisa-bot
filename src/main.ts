@@ -38,8 +38,12 @@ const main = async () => {
       const registry = getMessageFormatFromText(ctx.message.text);
       LogOperation(ctx, registry);
     } catch (e) {
-      ctx.telegram.deleteMessage(ctx.chat.id, ctx.message.message_id);
-      LogDeletion(ctx);
+      try {
+        ctx.telegram.deleteMessage(ctx.chat.id, ctx.message.message_id);
+        LogDeletion(ctx);
+      } catch (e) {
+        console.log('ERROR>>', e);
+      }
     }
   });
 
