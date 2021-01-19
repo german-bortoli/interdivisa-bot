@@ -11,15 +11,15 @@ export type MessageFormat = {
 };
 
 export type MessageFormatInput = {
-  [key: string]: string;
+  [key: string]: string | undefined;
 };
 
 const schema = Joi.object({
-  operacion: Joi.string().min(3).required(),
-  cantidad: Joi.string().min(2).required(),
-  precio: Joi.string().min(1).required(),
-  formadepago: Joi.string().optional(),
-  zona: Joi.string().optional(),
+  operacion: Joi.string().min(3).max(25).required(),
+  cantidad: Joi.string().min(2).max(13).required(),
+  precio: Joi.string().min(1).max(13).required(),
+  formadepago: Joi.string().max(25).optional(),
+  zona: Joi.string().max(25).optional(),
   observacion: Joi.string().optional(),
 });
 
@@ -35,12 +35,12 @@ export const getMessageFormatFromText = (text: string): MessageFormat | never =>
   const tmpText: string[] = text.toLowerCase().split('\n');
   const preText = tmpText.map((line) => line.split(':'));
   const mappedItems: MessageFormatInput = {
-    operacion: '',
-    cantidad: '',
-    precio: '',
-    formadepago: '',
-    zona: '',
-    observacion: '',
+    operacion: undefined,
+    cantidad: undefined,
+    precio: undefined,
+    formadepago: undefined,
+    zona: undefined,
+    observacion: undefined,
   };
 
   preText.forEach((line, index) => {
