@@ -3,7 +3,7 @@ import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConne
 import config from '../config';
 
 export default async (): Promise<Connection> => {
-  let connectionOptions: PostgresConnectionOptions = {
+  const connectionOptions: PostgresConnectionOptions = {
     type: 'postgres',
     host: config.db.host,
     port: Number(config.db.port),
@@ -12,7 +12,7 @@ export default async (): Promise<Connection> => {
     database: config.db.database,
     synchronize: true,
     logging: config.env !== 'production',
-    entities: ['src/entities/*.entity.ts'],
+    entities: [config.db.entities],
   };
 
   if (process.env.NODE_ENV === 'production') {

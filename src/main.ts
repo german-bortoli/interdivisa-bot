@@ -3,6 +3,7 @@ import { onlyGroups, appendAdmins, nonAdmins } from './middlewares';
 import { getMessageFormatFromText } from './utils';
 import { LogDeletion, LogOperation } from './services';
 import fastify from 'fastify';
+import { TelegrafContext } from 'telegraf/typings/context';
 
 const server = fastify({
   logger: true,
@@ -32,7 +33,7 @@ const main = async () => {
 
   bot.use(appendAdmins);
 
-  bot.on('text', onlyGroups, nonAdmins, (ctx) => {
+  bot.on('text', onlyGroups, nonAdmins, (ctx: TelegrafContext) => {
     try {
       const registry = getMessageFormatFromText(ctx.message.text);
       LogOperation(ctx, registry);

@@ -30,7 +30,7 @@ export const LogOperation = (ctx: TelegrafContext, operation: MessageFormat) => 
   }
 };
 
-export const LogDeletion = (ctx) => {
+export const LogDeletion = (ctx: TelegrafContext) => {
   const OperationRepository = getRepository(UserHistoryEntity);
 
   const record = {
