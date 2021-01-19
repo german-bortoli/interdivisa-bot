@@ -3,6 +3,7 @@ import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConne
 import config from '../config';
 
 export default async (): Promise<Connection> => {
+
   const connectionOptions: PostgresConnectionOptions = {
     type: 'postgres',
     host: config.db.host,
@@ -15,7 +16,7 @@ export default async (): Promise<Connection> => {
     entities: [config.db.entities],
   };
 
-  if (process.env.IS_HEROKU) {
+  if (process.env.POSTGRES_SSL) {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     connectionOptions['ssl'] = {

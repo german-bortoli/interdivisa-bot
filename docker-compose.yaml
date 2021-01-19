@@ -12,6 +12,7 @@ services:
       - POSTGRES_HOST=postgres
       - POSTGRES_DB=interdivisa_bot
       - BOT_TOKEN=${BOT_TOKEN}
+      - ORM_ENTITIES=${ORM_ENTITIES}
     ports:
       - 3000:3000
     volumes:

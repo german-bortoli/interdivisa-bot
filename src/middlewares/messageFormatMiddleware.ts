@@ -7,6 +7,11 @@ export const messageFormatMiddleware = (
   ctx: TelegrafContext,
   next: NextFunction,
 ): void | Promise<void | NextFunction> => {
+  const message = ctx.message || ctx.update.edited_message;
+  if (!message) {
+    return next();
+  }
+
   try {
     const registry = getMessageFormatFromText(ctx.message.text);
     LogOperation(ctx, registry);
@@ -14,8 +19,8 @@ export const messageFormatMiddleware = (
     try {
       ctx.telegram.deleteMessage(ctx.chat.id, ctx.message.message_id);
       LogDeletion(ctx);
-    } catch (e) {
-      console.log('ERROR>>', e);
+    } catch (er) {
+      console.log('ERROR>>', er);
     }
   }
 
