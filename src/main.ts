@@ -37,6 +37,10 @@ const main = async () => {
     console.log('Bot has been started');
     await initRestServer();
   });
+
+  // Enable graceful stop
+  process.once('SIGINT', () => bot.stop());
+  process.once('SIGTERM', () => bot.stop());
 };
 
 main();
