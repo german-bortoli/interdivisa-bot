@@ -41,9 +41,9 @@ export const messageFormatMiddleware = (
       ctx.telegram.deleteMessage(ctx.chat.id, message.message_id);
       LogDeletion(ctx);
 
-      ctx.reply(REPLY_TEXT, {
-        reply_to_message_id: message.message_id,
-      });
+      //ctx.reply(REPLY_TEXT, {
+      //  reply_to_message_id: message.message_id,
+      //});
     } catch (er) {
       console.log('ERROR>>', er);
     }
