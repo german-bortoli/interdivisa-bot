@@ -15,11 +15,11 @@ export type MessageFormatInput = {
 };
 
 const schema = Joi.object({
-  operacion: Joi.string().min(3).max(30).required(),
-  cantidad: Joi.string().min(2).max(25).required(),
-  precio: Joi.string().min(1).max(25).required(),
-  formadepago: Joi.string().max(25).optional(),
-  zona: Joi.string().max(30).optional(),
+  operacion: Joi.string().min(3).max(50).required(),
+  cantidad: Joi.string().min(2).max(50).required(),
+  precio: Joi.string().min(1).max(50).required(),
+  formadepago: Joi.string().max(50).optional(),
+  zona: Joi.string().max(50).optional(),
   observacion: Joi.string().max(200).optional(),
 });
 
