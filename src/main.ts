@@ -1,9 +1,11 @@
 import telegraf from './loaders';
 import { onlyGroups, appendAdmins, nonAdmins, messageFormatMiddleware } from './middlewares';
 import fastify from 'fastify';
+import { REPLY_TEXT } from './constants';
+import config from './config';
 
 const server = fastify({
-  logger: true,
+  logger: config.env !== 'production',
 });
 
 server.get('/', async (request, reply) => {
@@ -22,7 +24,7 @@ const initRestServer = async () => {
 const main = async () => {
   const bot = await telegraf();
   bot.start((ctx) => ctx.reply('Bienvenido'));
-  bot.help((ctx) => ctx.reply('InterDivisa Bot'));
+  bot.help((ctx) => ctx.reply(REPLY_TEXT));
 
   bot.telegram.getMe().then((botInfo) => {
     bot.options.username = botInfo.username;
