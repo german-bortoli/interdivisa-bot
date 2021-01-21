@@ -3,6 +3,7 @@ import { onlyGroups, appendAdmins, nonAdmins, messageFormatMiddleware } from './
 import fastify from 'fastify';
 import { REPLY_TEXT } from './constants';
 import config from './config';
+import { TelegrafContext } from 'telegraf/typings/context';
 
 const server = fastify({
   logger: config.env !== 'production',
@@ -34,6 +35,10 @@ const main = async () => {
 
   bot.on('text', onlyGroups, nonAdmins, messageFormatMiddleware);
   bot.on('edited_message', onlyGroups, nonAdmins, messageFormatMiddleware);
+
+  bot.catch((err: Error, ctx: TelegrafContext) => {
+    console.log(`Ooops, encountered an error for ${ctx.updateType}`, err);
+  });
 
   bot.launch().then(async () => {
     console.log('Bot has been started');
