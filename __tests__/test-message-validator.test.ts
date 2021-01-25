@@ -25,6 +25,26 @@ it('Venta: Validate proper format', () => {
   expect(result).toEqual(expected);
 });
 
+
+
+it('Compra: Typo en operacion', () => {
+  const text = `
+    Operación : Conpra USD cara grande
+    Cantidad: 11.600
+    Precio: $163
+    Forma de pago: efectivo billetes grandes
+    Zona: microcentro: Santa Fe
+    Observación: Billetes rotos`;
+
+  try {
+    getMessageFormatFromText(text);
+    // Fail test if above expression doesn't throw anything.
+    expect(true).toBe(false);
+  } catch (e) {
+    expect(e.length).not.toEqual(0);
+  }
+});
+
 it('Compra: Validate proper format', () => {
   const text = `
     Operación : Compro USD cara chica

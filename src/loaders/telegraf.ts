@@ -1,9 +1,13 @@
 import * as dotenv from 'dotenv';
-import { Telegraf } from 'telegraf';
+import { Telegraf, Context } from 'telegraf';
 dotenv.config();
 
 import config from '../config';
 
+interface BotContext extends Context {
+  _admins: any[];
+}
+
 export default (): InstanceType<typeof Telegraf> => {
-  return new Telegraf(config.botToken);
+  return new Telegraf<BotContext>(config.botToken);
 };

@@ -74,6 +74,10 @@ export const getMessageFormatFromText = (text: string): MessageFormat | never =>
     operationType = operation.indexOf('vendo') >= 0 ? 'venta' : operation.indexOf('compro') >= 0 ? 'compra' : null;
   }
 
+  if (!operationType || operationType.length === 0) {
+    throw 'Solo compra y venta son validas';
+  }
+
   const toReturn = {
     operation,
     operationType,

@@ -1,28 +1,31 @@
-import { TelegrafContext } from 'telegraf/typings/context';
+import { Context } from 'telegraf';
 import { NextFunction } from 'express';
 import { getMessageFormatFromText } from '../utils';
-import { LogDeletion, LogOperation } from '../services';
+import { LogOperation } from '../services';
 
-export const messageFormatMiddleware = (
-  ctx: TelegrafContext,
+export const messageFormatMiddleware = async (
+  ctx: Context,
   next: NextFunction,
-): void | Promise<void | NextFunction> => {
-  const message = ctx.message || ctx.update.edited_message;
-  if (!message) {
-    return next();
+): Promise<void | Promise<void | NextFunction>> => {
+  const msg = ctx.message ?? ctx.editedMessage;
+
+  if (!('text' in msg)) {
+    return next(ctx);
   }
 
+  const { text, message_id } = msg;
+
   try {
-    const registry = getMessageFormatFromText(message.text);
+    const registry = getMessageFormatFromText(text);
     LogOperation(ctx, registry);
   } catch (e) {
     try {
-      ctx.telegram.deleteMessage(ctx.chat.id, message.message_id);
-      LogDeletion(ctx);
+      await ctx.telegram.deleteMessage(ctx.chat.id, message_id);
+      // LogDeletion(ctx);
     } catch (er) {
       console.log('ERROR>>', er);
     }
   }
 
-  return next();
+  return next(ctx);
 };
