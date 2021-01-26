@@ -1,14 +1,11 @@
-import { TelegrafContext } from 'telegraf/typings/context';
+import { Context } from 'telegraf';
 import { NextFunction } from 'express';
 
-export const appendAdmins = (ctx: TelegrafContext, next: NextFunction): void | Promise<void | NextFunction> => {
+export const appendAdmins = (ctx: Context, next: NextFunction): void | Promise<void | NextFunction> => {
   if (ctx.chat.id > 0) {
-    return next();
+    return next(ctx);
   }
 
-  /// need to cache this result ( variable or session or ....)
-  /// because u don't need to call this method
-  /// every message
   return ctx.telegram
     .getChatAdministrators(ctx.chat.id)
     .then((data) => {

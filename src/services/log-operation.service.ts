@@ -1,14 +1,17 @@
-import { TelegrafContext } from 'telegraf/typings/context';
+import { Context } from 'telegraf/typings/context';
 import { MessageFormat } from '../utils';
 import { getRepository } from 'typeorm';
 import { OperationEntity } from '../entities/operation.entity';
 import { UserHistoryEntity } from '../entities/userHistory.entity';
 
-export const LogOperation = (ctx: TelegrafContext, operation: MessageFormat) => {
+export const LogOperation = (ctx: Context, operation: MessageFormat) => {
   const OperationRepository = getRepository(OperationEntity);
+
 
   const record = {
     userId: String(ctx.from.id),
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     groupName: ctx.chat.title ? ctx.chat.title.toLowerCase() : 'inder-divisas',
     operation: operation.operation,
     operationType: operation.operationType,
@@ -30,11 +33,13 @@ export const LogOperation = (ctx: TelegrafContext, operation: MessageFormat) => 
   }
 };
 
-export const LogDeletion = (ctx: TelegrafContext) => {
+export const LogDeletion = (ctx: Context) => {
   const OperationRepository = getRepository(UserHistoryEntity);
 
   const record = {
     userId: String(ctx.from.id),
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     groupName: ctx.chat.title ? ctx.chat.title.toLowerCase() : 'inder-divisas',
   };
 
