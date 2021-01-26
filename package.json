@@ -43,7 +43,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "_postinstall": "npm run build",
+    "postinstall": "npm run build",
     "format": "prettier --write \"src/**/*.ts\"",
     "start:dev": "nodemon",
     "start": "NODE_ENV=production node build/main.js",
