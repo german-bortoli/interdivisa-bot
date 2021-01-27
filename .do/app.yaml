@@ -1,0 +1,8 @@
+name: interdivisa-bot
+services:
+  - environment_slug: node-js
+    github:
+      branch: main
+      deploy_on_push: true
+      repo: german-bortoli/interdivisa-bot
+    name: interdivisa-bot
