@@ -2,8 +2,9 @@ import { Connection, createConnection } from 'typeorm';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 import config from '../config';
 
-export default async (): Promise<Connection> => {
+const dbEntites = config.env === 'production' ? 'build/entities/*.entity.js' : 'src/entities/*.entity.ts';
 
+export default async (): Promise<Connection> => {
   const connectionOptions: PostgresConnectionOptions = {
     type: 'postgres',
     host: config.db.host,
@@ -13,7 +14,7 @@ export default async (): Promise<Connection> => {
     database: config.db.database,
     synchronize: true,
     logging: config.env !== 'production',
-    entities: [config.db.entities],
+    entities: [dbEntites],
   };
 
   if (process.env.POSTGRES_SSL) {
