@@ -3,7 +3,9 @@ version: '3.7'
 services:
 
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.nodejs
     environment:
       - NODE_ENV=development
       - POSTGRES_USER=postgres
