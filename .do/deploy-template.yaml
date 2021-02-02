@@ -1,8 +1,0 @@
-spec:
-  name: interdivisa-bot
-  services:
-    - environment_slug: node-js
-      git:
-        branch: main
-        repo_clone_url: https://github.com/german-bortoli/interdivisa-bot.git
-      name: interdivisa-bot
