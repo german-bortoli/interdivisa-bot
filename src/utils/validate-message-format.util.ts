@@ -16,7 +16,7 @@ export type MessageFormatInput = {
 
 const schema = Joi.object({
   operacion: Joi.string().min(3).max(50).required(),
-  cantidad: Joi.string().min(2).max(50).required(),
+  cantidad: Joi.string().min(2).max(50).optional(),
   precio: Joi.string().min(1).max(50).required(),
   formadepago: Joi.string().max(50).optional(),
   zona: Joi.string().max(50).optional(),
